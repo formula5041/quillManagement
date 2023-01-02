@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/quillManagement/static/css/main.3a098d1e.css",
+    "main.js": "/quillManagement/static/js/main.94510e8d.js",
+    "static/media/atom.svg": "/quillManagement/static/media/atom.4ad3aa78d35636a8ebcaec463ecfed4d.svg",
+    "index.html": "/quillManagement/index.html",
+    "main.3a098d1e.css.map": "/quillManagement/static/css/main.3a098d1e.css.map",
+    "main.94510e8d.js.map": "/quillManagement/static/js/main.94510e8d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a098d1e.css",
+    "static/js/main.94510e8d.js"
+  ]
+}
