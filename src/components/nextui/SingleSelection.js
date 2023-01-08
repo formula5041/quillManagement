@@ -18,10 +18,11 @@ export default function App(props) {
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
   )
-  const selectFun = ()=>{
-    props.selectionChangeHandler(selectedValue)
+  const selectFun = (target)=>{
+    let value = target.values().next().value
+    setSelected(new Set([value]))
+    props.selectionChangeHandler(value)
   }
-  selectFun()
   return (
     <Dropdown>
       <Dropdown.Button 
@@ -36,7 +37,7 @@ export default function App(props) {
         disallowEmptySelection
         selectionMode={props.selectionMode}
         selectedKeys={selected}
-        onSelectionChange={setSelected}
+        onSelectionChange={selectFun}
       >
         {DropdownItemsList}
       </Dropdown.Menu>

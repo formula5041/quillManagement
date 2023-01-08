@@ -9,6 +9,7 @@ export default function App(props) {
         color={props.color}
         icon={props.icon}
         onClick={props.clickHandler}
+        css={props.css}
       >{props.iconName}</Button>
       <Spacer y={1} />
     </>

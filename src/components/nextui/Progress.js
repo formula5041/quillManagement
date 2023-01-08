@@ -1,11 +1,16 @@
-import { Progress, Grid } from "@nextui-org/react";
+import { Progress } from "@nextui-org/react";
 
-export default function App() {
+export default function App(props) {
   return (
-    <Grid.Container xs={12} sm={6} gap={2}>
-      <Grid>
-        <Progress value={100} shadow color="primary" status="primary" />
-      </Grid>
-    </Grid.Container>
+    <>
+      <Progress 
+        size="xs"
+        value={props.positionValue} 
+        shadow 
+        color="warning" 
+        status="success" 
+        css={props.css}
+      />
+    </>
   );
 }
