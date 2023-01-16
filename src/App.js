@@ -21,30 +21,11 @@ import Switch from './components/nextui/Switch'
 import Text from './components/nextui/Text'
 import SingleSelection from './components/nextui/SingleSelection'
 import Progress from './components/nextui/Progress'
+// mixin
+import booklists from './mixin/booklists'
+import quillModules from './mixin/quillConfig'
 // register quill components
 Quill.register('modules/ImageResize', ImageResize);
-
-const modules = {
-  toolbar: [
-    [{size: []}],
-    [{ 'font': [] }],
-    [{ 'color': [] }, { 'background': [] }], 
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [
-      {'list': 'ordered'}, {'list': 'bullet'}, 
-      {'indent': '-1'}, {'indent': '+1'}
-    ],
-    ['link', 'image', 'video'],
-    ['clean'],
-  ],
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  },
-  ImageResize: {
-    modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
-  }   
-}
 
 const dropdownItems = {
   travel:{
@@ -69,23 +50,19 @@ const dropdownItems = {
   },
 }
 
-// const articlesButtonSelotorItems = [
-//   {name: 'Show All', color: 'success'},
-//   {name: 'Show Less', color: 'error'},
-//   {name: 'Show Latest', color: 'secondary'},
-// ]
-
-
 const App = () => {
   const [quillContent, setQuillContent] = useState('')
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [articleFilrerValue, setArticleFilrerValue] = useState('')
+  const [articleLatestState, setArticleLatestState] = useState(false)
+  const [articlePublishedState, setArticlePublishedState] = useState(false)
   
 
   const moveBar = () =>{
     let progress = Math.ceil((Math.round(window.pageYOffset) /(document.body.scrollHeight - window.innerHeight)) * 100)
     setScrollPosition(progress)
   }
-  
+
   useEffect(()=>{
     window.addEventListener('scroll', () => {
       moveBar()
@@ -93,7 +70,7 @@ const App = () => {
     return () => {
       window.removeEventListener('scroll', moveBar);
     };
-  },[])
+  },[scrollPosition])
 
   const saveFunc = () =>{
     console.log('Content is saved!')
@@ -111,17 +88,22 @@ const App = () => {
     let selectType = e.target.textContent
     switch (selectType) {
       case 'Show All':
-        console.log(selectType)
-        break
-      case 'Show Less':
-        console.log(selectType)
+        setArticleLatestState(false)
+        setArticleFilrerValue('')
         break
       case 'Show Latest':
-        console.log(selectType)
+        setArticleLatestState(!articleLatestState)
+        break
+      case 'Show Published':
+        setArticlePublishedState(!articlePublishedState)
         break
       default:
         console.log('default')
     }
+  }
+  const articleFilterFun = (e) =>{
+    let value = e.target.value
+    setArticleFilrerValue(value)
   }
 
   return (
@@ -181,7 +163,7 @@ const App = () => {
                   />
                   <Spacer x={1} />
                   <Text 
-                    text="Publish:"
+                    text="Published:"
                     color="#75757570"
                     h5={true}
                     css={{
@@ -202,7 +184,7 @@ const App = () => {
               theme="snow" 
               value={quillContent} 
               onChange={setQuillContent} 
-              modules={modules}
+              modules={quillModules}
             />
             <div className='button-click'>
               <Grid.Container gap={2} justify="center">
@@ -254,6 +236,7 @@ const App = () => {
                   width: "400px",
                   margin: 10,
                 }}
+                onChange={articleFilterFun}
               />
             </Grid>
             <Grid xs={4} justify="center">
@@ -275,7 +258,7 @@ const App = () => {
                 size="xl"
                 color="warning"
                 icon={<IoIosEye size={30}/>}
-                iconName="Show Less"
+                iconName="Show Latest"
                 clickHandler={articleSelector}
                 css={{
                   margin: 10
@@ -288,19 +271,20 @@ const App = () => {
                 size="xl"
                 color="secondary"
                 icon={<IoLogoIonic size={30}/>}
-                iconName="Show Latest"
+                iconName="Show Published"
                 clickHandler={articleSelector}
                 css={{
                   margin: 10
                 }}
               />
             </Grid>
-            
-            
-
-
             <Grid.Container gap={2} justify="flex-start">
-              <CardArticleBox/>
+              <CardArticleBox 
+                lists={booklists}
+                fil={articleFilrerValue}
+                latestState={articleLatestState}
+                publishedState={articlePublishedState}
+              />
             </Grid.Container>
           </Grid.Container>
         </div>

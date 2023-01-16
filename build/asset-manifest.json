@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/quillManagement/static/css/main.808d4921.css",
-    "main.js": "/quillManagement/static/js/main.01a956df.js",
+    "main.css": "/quillManagement/static/css/main.67997e37.css",
+    "main.js": "/quillManagement/static/js/main.e7a6c96a.js",
+    "static/media/airplane.jpg": "/quillManagement/static/media/airplane.324b2823670a5ac77bc8.jpg",
+    "static/media/travel.jpg": "/quillManagement/static/media/travel.3dc8a1277eb5ec23c907.jpg",
     "static/media/atom.svg": "/quillManagement/static/media/atom.4ad3aa78d35636a8ebcaec463ecfed4d.svg",
     "index.html": "/quillManagement/index.html",
-    "main.808d4921.css.map": "/quillManagement/static/css/main.808d4921.css.map",
-    "main.01a956df.js.map": "/quillManagement/static/js/main.01a956df.js.map"
+    "main.67997e37.css.map": "/quillManagement/static/css/main.67997e37.css.map",
+    "main.e7a6c96a.js.map": "/quillManagement/static/js/main.e7a6c96a.js.map"
   },
   "entrypoints": [
-    "static/css/main.808d4921.css",
-    "static/js/main.01a956df.js"
+    "static/css/main.67997e37.css",
+    "static/js/main.e7a6c96a.js"
   ]
 }

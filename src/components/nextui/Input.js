@@ -4,6 +4,7 @@ export default function App(props) {
   return (
     <>
       <Input 
+        value={props.value}
         clearable={props.clearable}
         underlined={props.underlined}
         rounded={props.rounded}
@@ -19,7 +20,7 @@ export default function App(props) {
         helperText={props.helperText}
         aria-label="Close"
         css={props.css}
-
+        onChange={props.onChange}
       />
       <Spacer y={4} />
     </>
