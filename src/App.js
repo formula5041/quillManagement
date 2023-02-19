@@ -1,3 +1,4 @@
+import cover from './assets/cover.jpg'
 // css
 import './App.css';
 import 'react-quill/dist/quill.snow.css';
@@ -21,6 +22,8 @@ import Switch from './components/nextui/Switch'
 import Text from './components/nextui/Text'
 import SingleSelection from './components/nextui/SingleSelection'
 import Progress from './components/nextui/Progress'
+import Image from './components/nextui/Image'
+import InputFile from './components/customui/InputFile'
 // mixin
 import booklists from './mixin/booklists'
 import quillModules from './mixin/quillConfig'
@@ -56,6 +59,7 @@ const App = () => {
   const [articleFilrerValue, setArticleFilrerValue] = useState('')
   const [articleLatestState, setArticleLatestState] = useState(false)
   const [articlePublishedState, setArticlePublishedState] = useState(false)
+  const [imageSrc, setImageSrc] = useState('')
   
 
   const moveBar = () =>{
@@ -106,6 +110,21 @@ const App = () => {
     setArticleFilrerValue(value)
   }
 
+  const uploadCoverImgFunc = (e)=>{
+    const file = e.target.files[0]
+    const reader = new FileReader()
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+      setImageSrc(reader.result)
+    }, false)
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
+  }
+
+  
+
   return (
       <div className="App">
         <div className="App-container">
@@ -138,11 +157,45 @@ const App = () => {
                   placeholder="ENTER YOUR TITLE"
                   color="warning"
                   size="xl"
+                  type="text"
                   css={{
                     textAlign: "start",
                     width: "500px",
                   }}
                 />
+              </Grid>
+              <Grid xs={12} justify="flex-start" alignItems="center">
+                <Text 
+                  text="Cover:"
+                  color="#75757570"
+                  h5={true}
+                  css={{
+                    margin: 0
+                  }}
+                />
+                <Spacer x={1} />
+                <InputFile
+                  accept="image/*"
+                  changeHandler={uploadCoverImgFunc}
+                />
+              </Grid>
+              <Grid xs={12} justify="center" alignItems="center">
+                <div className='cover-container'>
+                  {imageSrc?
+                    <Image
+                      width={400}
+                      height={200}
+                      src={imageSrc}
+                      objectFit="contain"
+                    /> :
+                    <Image
+                      width={400}
+                      height={200}
+                      src={cover}
+                      objectFit="contain"
+                    />
+                  }
+                </div>
               </Grid>
               <Grid xs={12} justify="flex-start" alignItems="center">
                   <Text 
@@ -231,6 +284,7 @@ const App = () => {
                 placeholder="Enter your articles"
                 size="xl"
                 status="warning"
+                type="search"
                 css={{
                   textAlign: "start",
                   width: "400px",

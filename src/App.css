@@ -21,6 +21,10 @@
 .button-click{
   margin: 10px 0;
 }
+.cover-container{
+  padding: 10px 0;
+  border: 2px solid grey;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

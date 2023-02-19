@@ -19,6 +19,7 @@ export default function App(props) {
         helperColor={props.helperColor}
         helperText={props.helperText}
         aria-label="Close"
+        type={props.type}
         css={props.css}
         onChange={props.onChange}
       />
